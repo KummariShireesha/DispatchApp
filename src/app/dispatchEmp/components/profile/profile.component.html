@@ -1,0 +1,25 @@
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <div class="profile-photo-container">
+      <img src="../../../../assets/profile.webp" alt="Profile Photo" class="profile-image">
+    </div>
+    <mat-card-content>
+      <div class="profile-field">
+        <strong>Username:</strong> 
+        <span>:&nbsp;{{profile?.userName}}</span>
+      </div>
+      <div class="profile-field">
+        <strong>Designation:</strong>
+        <span>:&nbsp;</span> {{ profile?.Designation }}
+      </div>
+      <div class="profile-field">
+        <strong>Role:</strong> 
+        <span>:&nbsp;</span>{{ profile?.Role }}
+      </div>
+      <div class="profile-field">
+        <strong>Location Name:</strong>
+        <span>:&nbsp;</span> {{ profile?.locationName }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
