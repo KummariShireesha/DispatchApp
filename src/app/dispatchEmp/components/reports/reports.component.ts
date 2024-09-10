@@ -64,9 +64,9 @@ export class ReportsComponent {
 
   private setDisplayedColumns(parcelType: string) {
     if (parcelType === 'in') {
-      this.displayedColumns = ['senderLocCode', 'senderName','senderDepartment', 'recipientName', 'recipientDepartment','recordStatus','receivedDate','createdDate'];
+      this.displayedColumns = ['senderLocCode', 'senderName','senderDepartment', 'recipientName', 'recipientDepartment','courierName','recordStatus','consignmentDate','receivedDate','createdDate'];
     } else if (parcelType === 'out') {
-      this.displayedColumns = ['senderName','senderDepartment', 'recipientLocCode', 'recipientName','recipientDepartment', 'weight', 'unit','recordStatus', 'createdDate'];
+      this.displayedColumns = ['senderName','senderDepartment', 'recipientLocCode', 'recipientName','recipientDepartment', 'weight', 'unit','courierName','recordStatus','consignmentDate','createdDate'];
     }
   }
 }

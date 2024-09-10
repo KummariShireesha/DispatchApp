@@ -37,13 +37,13 @@ export const routes: Routes = [
   {
     path: 'dispatchEmployee',
     component: DispatchEmployeeComponent,
+    
     children: [
-      // { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }, 
+      { path: 'home', component: HomeComponent }, 
       { path: 'parcelIn', component: ParcelInComponent },
       { path: 'parcelOut', component: ParcelOutComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'history', component: HistoryComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'parcelEdit', component: ParcelEditComponent },
@@ -56,6 +56,7 @@ export const routes: Routes = [
     path: 'ioclEmployee',
     component: IoclEmployeeComponent,
     children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
       { path: 'dashboard', component: DashboardComponent },
       //  { path:'profile', component:ProfileComponent},
       // { path: 'dashboard', component: DashboardComponent },

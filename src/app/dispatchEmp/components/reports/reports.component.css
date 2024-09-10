@@ -12,4 +12,10 @@ mat-form-field {
     justify-content: space-evenly;
     overflow:auto;
 }
+
+.header-cell {
+  font-weight: 600; /* Makes the text slightly thinner */
+  font-size: 1rem; /* Optional: Adjust the font size to your preference */
+}
+
   

@@ -4,21 +4,22 @@
       <img src="../../../../assets/profile.webp" alt="Profile Photo" class="profile-image">
     </div>
     <mat-card-content>
-      <div class="profile-field">
-        <strong>Username:</strong> 
-        <span>:&nbsp;{{profile?.userName}}</span>
+      <div class="profile-field">      
+          <strong>Username:</strong>
+          <span>{{ profile?.EmpName }}</span> 
       </div>
-      <div class="profile-field">
-        <strong>Designation:</strong>
-        <span>:&nbsp;</span> {{ profile?.Designation }}
+      <div class="profile-field">    
+          <strong>Designation:</strong>
+          <span>{{ profile?.Designation }}</span>   
       </div>
-      <div class="profile-field">
-        <strong>Role:</strong> 
-        <span>:&nbsp;</span>{{ profile?.Role }}
+      <div class="profile-field">       
+          <strong>Role:</strong>
+          <span>{{ profile?.Role }}</span>      
       </div>
-      <div class="profile-field">
-        <strong>Location Name:</strong>
-        <span>:&nbsp;</span> {{ profile?.locationName }}
+      <div class="profile-field">   
+          <strong>Location Name:</strong>
+          <span>{{ profile?.locationName }}</span>
+       
       </div>
     </mat-card-content>
   </mat-card>

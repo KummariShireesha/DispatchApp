@@ -8,7 +8,7 @@
 
 .profile-card {
   height: 500px;
-  width: 400px;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,13 +35,13 @@ mat-card-content {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:start;
 }
 
-.profile-field {
+/* .profile-field {
   margin: 8px 0;
   font-size: 18px;
-}
+} */
 .profile-photo-container {
   display: flex;
   justify-content: center;
@@ -55,18 +55,20 @@ mat-card-content {
   border-radius: 50%; /* Makes the image circular */
   object-fit: cover; /* Ensures the image covers the container */
 }
-
-.profile-field {
+.profile-field  {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  margin-bottom: 10px;
+  width: 400px;
+  font-size: 15px;
 }
 
-.profile-field {
-  flex: 0 0 40%;
-  font-weight: 600;
+.profile-field  strong {
+  flex-basis: 40%;
+  text-align: left;
 }
 
 .profile-field span {
-  flex: 1;
+  flex-basis: 60%;
+  text-align: left;
 }
