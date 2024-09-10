@@ -108,33 +108,39 @@ export class AddRefSeqComponent {
         verticalPosition: 'top'
       });
       const user = this.seqForm.value;
-      console.log('user  Data:', user);
+      console.log('user Data:', user);
       return;
     }
   
     const seq = this.seqForm.value;
   
+    // Manually extract the code inside parentheses for locCode before submission
+    if (seq.locCode && seq.locCode.includes('(')) {
+      const startIdx = seq.locCode.indexOf('(') + 1;
+      const endIdx = seq.locCode.indexOf(')');
+      seq.locCode = seq.locCode.substring(startIdx, endIdx);
+    }
+  
     this.refSeqService.createSequence(seq).subscribe({
       next: (response) => {
-        this.snackBar.open('data submitted successfully!', 'Close', {
+        this.snackBar.open('Data submitted successfully!', 'Close', {
           duration: 3000,
           verticalPosition: 'top'
         });
-        console.log('user  Data:', seq);
-        // this.parcelInForm.reset();
+        console.log('user Data:', seq);
         this.seqForm.markAsPristine();
         this.seqForm.markAsUntouched();
-         this.seqForm.reset();
-         this.router.navigate(['/ioclEmployee/loc-implementation']); // Redirect to history after save
+        this.seqForm.reset();
+        this.router.navigate(['/ioclEmployee/loc-implementation']); // Redirect to history after save
       },
       error: (err) => {
-        this.snackBar.open('Failed to submit . Please try again.', 'Close', {
+        this.snackBar.open('Failed to submit. Please try again.', 'Close', {
           duration: 3000,
           verticalPosition: 'top'
         });
         const user = this.seqForm.value;
-      console.log('user  Data:', user);
+        console.log('user Data:', user);
       }
     });
   }
-  }
+}  

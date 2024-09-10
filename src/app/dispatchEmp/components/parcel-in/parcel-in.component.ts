@@ -218,6 +218,39 @@ import { error } from 'console';
     }
   
   
+  // onSubmit(): void {
+  //   if (this.parcelInForm.invalid) {
+  //     this.snackBar.open('Please fill all required fields.', 'Close', {
+  //       duration: 3000,
+  //       verticalPosition: 'top'
+  //     });
+  //     return;
+  //   }
+
+  //   const parcelIn = this.parcelInForm.value;
+
+  //   this.parcelInService.createParcel(parcelIn).subscribe({
+  //     next: (response) => {
+  //       this.snackBar.open('Parcel submitted successfully!', 'Close', {
+  //         duration: 3000,
+  //         verticalPosition: 'top'
+  //       });
+  //       console.log('Parcel In Data:', parcelIn);
+  //       // this.parcelInForm.reset();
+  //       this.parcelInForm.markAsPristine();
+  //       this.parcelInForm.markAsUntouched();
+  //        this.parcelInForm.reset();
+  //        this.router.navigate(['/dispatchEmployee/history']); // Redirect to history after save
+  //     },
+  //     error: (err) => {
+  //       this.snackBar.open('Failed to submit parcel. Please try again.', 'Close', {
+  //         duration: 3000,
+  //         verticalPosition: 'top'
+  //       });
+  //     }
+  //   });
+  // }
+
   onSubmit(): void {
     if (this.parcelInForm.invalid) {
       this.snackBar.open('Please fill all required fields.', 'Close', {
@@ -226,9 +259,19 @@ import { error } from 'console';
       });
       return;
     }
-
+  
+    // Extract only the code inside the brackets for senderLocCode
+    let senderLocCode = this.parcelInForm.get('senderLocCode')?.value;
+    if (senderLocCode) {
+      const match = senderLocCode.match(/\(([^)]+)\)/);  // Extract code inside parentheses
+      if (match && match[1]) {
+        senderLocCode = match[1];  // Assign only the code to senderLocCode
+        this.parcelInForm.get('senderLocCode')?.setValue(senderLocCode); // Update form value
+      }
+    }
+  
     const parcelIn = this.parcelInForm.value;
-
+  
     this.parcelInService.createParcel(parcelIn).subscribe({
       next: (response) => {
         this.snackBar.open('Parcel submitted successfully!', 'Close', {
@@ -236,11 +279,10 @@ import { error } from 'console';
           verticalPosition: 'top'
         });
         console.log('Parcel In Data:', parcelIn);
-        // this.parcelInForm.reset();
         this.parcelInForm.markAsPristine();
         this.parcelInForm.markAsUntouched();
-         this.parcelInForm.reset();
-         this.router.navigate(['/dispatchEmployee/history']); // Redirect to history after save
+        this.parcelInForm.reset();
+        this.router.navigate(['/dispatchEmployee/history']); // Redirect to history after save
       },
       error: (err) => {
         this.snackBar.open('Failed to submit parcel. Please try again.', 'Close', {
@@ -250,4 +292,5 @@ import { error } from 'console';
       }
     });
   }
+  
 }

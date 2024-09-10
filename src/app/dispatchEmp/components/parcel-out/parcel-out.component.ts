@@ -203,6 +203,38 @@ export class ParcelOutComponent implements OnInit {
     return this.recipients.filter(recipient => recipient.toLowerCase().includes(filterValue));
   }
 
+  // onSubmit(): void {
+  //   if (this.parcelOutForm.invalid) {
+  //     this.snackBar.open('Please fill all required fields.', 'Close', {
+  //       duration: 3000,
+  //       verticalPosition: 'top'
+  //     });
+  //     return;
+  //   }
+
+  //   const parcelOut = this.parcelOutForm.value;
+
+  //   this.parcelOutService.createParcel(parcelOut).subscribe({
+  //     next: () => {
+  //       this.snackBar.open('Parcel created successfully!', 'Close', {
+  //         duration: 3000,
+  //         verticalPosition: 'top'
+  //       });
+  //       // this.parcelOutForm.reset();
+  //       this.parcelOutForm.markAsPristine();
+  //       this.parcelOutForm.markAsUntouched();
+  //       this.parcelOutForm.reset();
+  //       this.router.navigate(['/dispatchEmployee/history'])
+  //     },
+  //     error: () => {
+  //       this.snackBar.open('Failed to create parcel. Please try again.', 'Close', {
+  //         duration: 3000,
+  //         verticalPosition: 'top'
+  //       });
+  //     }
+  //   });
+  // }
+
   onSubmit(): void {
     if (this.parcelOutForm.invalid) {
       this.snackBar.open('Please fill all required fields.', 'Close', {
@@ -211,20 +243,26 @@ export class ParcelOutComponent implements OnInit {
       });
       return;
     }
-
+  
     const parcelOut = this.parcelOutForm.value;
-
+  
+    // Manually extract the code inside parentheses for recipientLocCode before submission
+    if (parcelOut.recipientLocCode && parcelOut.recipientLocCode.includes('(')) {
+      const startIdx = parcelOut.recipientLocCode.indexOf('(') + 1;
+      const endIdx = parcelOut.recipientLocCode.indexOf(')');
+      parcelOut.recipientLocCode = parcelOut.recipientLocCode.substring(startIdx, endIdx);
+    }
+  
     this.parcelOutService.createParcel(parcelOut).subscribe({
       next: () => {
         this.snackBar.open('Parcel created successfully!', 'Close', {
           duration: 3000,
           verticalPosition: 'top'
         });
-        // this.parcelOutForm.reset();
         this.parcelOutForm.markAsPristine();
         this.parcelOutForm.markAsUntouched();
         this.parcelOutForm.reset();
-        this.router.navigate(['/dispatchEmployee/history'])
+        this.router.navigate(['/dispatchEmployee/history']);
       },
       error: () => {
         this.snackBar.open('Failed to create parcel. Please try again.', 'Close', {
@@ -234,4 +272,5 @@ export class ParcelOutComponent implements OnInit {
       }
     });
   }
+  
 }

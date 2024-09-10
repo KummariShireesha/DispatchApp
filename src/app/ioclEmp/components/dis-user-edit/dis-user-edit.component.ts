@@ -54,6 +54,7 @@ export class DisUserEditComponent
   editForm!: FormGroup;
   userData!:MstUser ;
   isDisabled:boolean=true;
+  empRoles:string[]=[];
 
   constructor(
     private mstUserService:MstUserService,
@@ -64,6 +65,14 @@ export class DisUserEditComponent
     
   ) { }
 
+  
+loadRoles():void{
+  this.ioclEmpServcie.getRoles().subscribe(roles =>{
+    this.empRoles=roles;
+  }
+  )
+}
+
   ngOnInit() {
     this.userData = this.mstUserService.getUserData();
 
@@ -72,7 +81,7 @@ export class DisUserEditComponent
       userId: [{ value: this.userData.userId, disabled: true },Validators.required],
       userName:[this.userData.userName,Validators.required],
       mobileNumber: [this.userData.mobileNumber, [Validators.required, Validators.pattern('^[0-9]+$')]],
-      roleId: [this.userData.roleId,Validators.required],
+      roleId: [{value:this.userData.roleId, disabled: true },Validators.required],
     });
   }
 

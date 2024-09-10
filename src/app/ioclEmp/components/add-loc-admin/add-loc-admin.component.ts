@@ -239,24 +239,30 @@ onSubmit(): void {
       verticalPosition: 'top'
     });
     const user = this.userForm.value;
-    console.log('user  Data:', user);
+    console.log('user Data:', user);
     return;
   }
 
   const user = this.userForm.value;
 
+  // Manually extract the code inside parentheses for locCode before submission
+  if (user.locCode && user.locCode.includes('(')) {
+    const startIdx = user.locCode.indexOf('(') + 1;
+    const endIdx = user.locCode.indexOf(')');
+    user.locCode = user.locCode.substring(startIdx, endIdx);
+  }
+
   this.mstUserService.createLocAdmin(user).subscribe({
     next: (response) => {
-      this.snackBar.open('user submitted successfully!', 'Close', {
+      this.snackBar.open('User submitted successfully!', 'Close', {
         duration: 3000,
         verticalPosition: 'top'
       });
-      console.log('user  Data:', user);
-      // this.parcelInForm.reset();
+      console.log('user Data:', user);
       this.userForm.markAsPristine();
       this.userForm.markAsUntouched();
-       this.userForm.reset();
-       this.router.navigate(['/ioclEmployee/loc-admin']); // Redirect to history after save
+      this.userForm.reset();
+      this.router.navigate(['/ioclEmployee/loc-admin']); // Redirect to history after save
     },
     error: (err) => {
       this.snackBar.open('Failed to submit user. Please try again.', 'Close', {
@@ -264,7 +270,7 @@ onSubmit(): void {
         verticalPosition: 'top'
       });
       const user = this.userForm.value;
-    console.log('user  Data:', user);
+      console.log('user Data:', user);
     }
   });
 }

@@ -109,7 +109,7 @@ getLocationNames(): Observable<string> {
 }
 
 getAllLocations(): Observable<string[]> {
-  return this.http.get<string[]>(`${this.baseUrl}/locCodes`);
+  return this.http.get<string[]>(`${this.baseUrl}/locNames`);
 }
 
 getEmployeesByLoc(locCode: string): Observable<string[]> {
