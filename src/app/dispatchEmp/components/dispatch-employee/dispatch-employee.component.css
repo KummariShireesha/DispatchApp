@@ -69,3 +69,6 @@ mat-sidenav {
 .list-text {
   font-size: 16px;
 }
+.child-item {
+  padding-left: 20px; /* Indents the child items */
+}

@@ -86,3 +86,50 @@
   mat-icon {
     margin-right: 8px; /* Space between the icon and text */
   }
+
+   /* .child-menu-list {
+    padding-left: 20px; 
+  }
+  
+  .child-menu {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  
+  .child-menu:hover {
+    color: #1976d2; 
+    cursor: pointer;
+  }
+  
+  
+  .mat-list-item {
+    margin-bottom: 10px;
+  }
+  
+  .child-menu-list .mat-list-item {
+    margin-bottom: 5px;
+  }  */
+    /* Indent the child menus to make them appear as sub-items */
+.child-menu {
+  margin-left: 20px; /* Indent the child menu */
+  padding-left: 10px;
+}
+
+/* Optionally, adjust the child item for further visual distinction */
+.child-item {
+  padding-left: 15px;
+  font-size: 14px; /* Reduce font size for child items */
+}
+
+/* Style parent and child items differently for better visibility */
+mat-list-item {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.child-menu mat-list-item {
+  height: 40px; /* Smaller height for child items */
+}
+

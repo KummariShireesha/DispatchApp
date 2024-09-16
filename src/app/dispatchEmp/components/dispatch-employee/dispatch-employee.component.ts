@@ -43,6 +43,13 @@ import { MatMenuModule } from '@angular/material/menu';
 export class DispatchEmployeeComponent {
   searchQuery: string = '';
   profile:any;
+
+  showReports: boolean = false;
+
+  toggleReports() {
+    this.showReports = !this.showReports;
+  }
+  
   constructor(private router: Router,private verOtp:DisEmpVerOtpService) {
      // Access profile data from router state
     //  const navigation = this.router.getCurrentNavigation();

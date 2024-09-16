@@ -45,7 +45,7 @@
         <mat-icon class="list-icon">history</mat-icon>
         <span class="list-text">History</span>
       </a>
-      <a mat-list-item (click)="navigate('/dispatchEmployee/reports')">
+      <a mat-list-item (click)="navigate('/dispatchEmployee/reports')"  (click)="toggleReports()" >
         <mat-icon class="list-icon">assessment</mat-icon>
         <span class="list-text">Reports</span>
       </a>
@@ -53,6 +53,16 @@
         <mat-icon class="list-icon">person</mat-icon>
         <span class="list-text">Profile</span>
       </a> -->
+      <ng-container *ngIf="showReports">
+        <a mat-list-item (click)="navigate('/dispatchEmployee/reports/dailyReports')" class="child-item">
+          <mat-icon class="list-icon">today</mat-icon>
+          <span class="list-text">Daily Reports</span>
+        </a>
+        <a mat-list-item (click)="navigate('/dispatchEmployee/reports/monthlyReports')" class="child-item">
+          <mat-icon class="list-icon">date_range</mat-icon>
+          <span class="list-text">Monthly Reports</span>
+        </a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

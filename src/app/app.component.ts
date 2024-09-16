@@ -22,6 +22,10 @@ import { DispatchComponent } from './ioclEmp/components/dispatch/dispatch.compon
 import { UserEditComponent } from './ioclEmp/components/user-edit/user-edit.component';
 import { AddLocAdminComponent } from './ioclEmp/components/add-loc-admin/add-loc-admin.component';
 import { AddRefSeqComponent } from './ioclEmp/components/add-ref-seq/add-ref-seq.component';
+import { DailyReportsComponent } from './ioclEmp/components/daily-reports/daily-reports.component';
+import { MonthlyReportsComponent } from './ioclEmp/components/monthly-reports/monthly-reports.component';
+import { DisDailyReportComponent } from './dispatchEmp/components/dis-daily-report/dis-daily-report.component';
+import { DisMonthlyReportsComponent } from './dispatchEmp/components/dis-monthly-reports/dis-monthly-reports.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -48,7 +52,11 @@ import { AddRefSeqComponent } from './ioclEmp/components/add-ref-seq/add-ref-seq
     DispatchComponent,
     UserEditComponent,
     AddLocAdminComponent,
-    AddRefSeqComponent
+    AddRefSeqComponent,
+    DailyReportsComponent,
+    MonthlyReportsComponent,
+    DisDailyReportComponent,
+    DisMonthlyReportsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

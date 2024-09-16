@@ -26,6 +26,10 @@ import { AddLocAdminComponent } from './ioclEmp/components/add-loc-admin/add-loc
 import { AddRefSeqComponent } from './ioclEmp/components/add-ref-seq/add-ref-seq.component';
 import { AddDisUserComponent } from './ioclEmp/components/add-dis-user/add-dis-user.component';
 import { DisUserEditComponent } from './ioclEmp/components/dis-user-edit/dis-user-edit.component';
+import { DailyReportsComponent } from './ioclEmp/components/daily-reports/daily-reports.component';
+import { MonthlyReportsComponent } from './ioclEmp/components/monthly-reports/monthly-reports.component';
+import { DisDailyReportComponent } from './dispatchEmp/components/dis-daily-report/dis-daily-report.component';
+import { DisMonthlyReportsComponent } from './dispatchEmp/components/dis-monthly-reports/dis-monthly-reports.component';
 export const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "disEmpReqOtp", component: DisEmpReqOtpComponent },
@@ -37,26 +41,30 @@ export const routes: Routes = [
   {
     path: 'dispatchEmployee',
     component: DispatchEmployeeComponent,
-    
+
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, 
-      { path: 'home', component: HomeComponent }, 
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'parcelIn', component: ParcelInComponent },
       { path: 'parcelOut', component: ParcelOutComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'parcelEdit', component: ParcelEditComponent },
-      { path: 'parcelOutEdit', component: ParcelOutEditComponent }
+      { path: 'parcelOutEdit', component: ParcelOutEditComponent },
+      {
+        path:'reports/dailyReports',component:DisDailyReportComponent
+      },
+      {path:'reports/monthlyReports',component:DisMonthlyReportsComponent}
     ]
   },
   //  {path:'',redirectTo:'ioclEmployee/loc-admin',pathMatch:'full'},
- // {path:'',redirectTo:'ioclEmployee/dispatch',pathMatch:'full'},
+  // {path:'',redirectTo:'ioclEmployee/dispatch',pathMatch:'full'},
   {
     path: 'ioclEmployee',
     component: IoclEmployeeComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       //  { path:'profile', component:ProfileComponent},
       // { path: 'dashboard', component: DashboardComponent },
@@ -64,15 +72,18 @@ export const routes: Routes = [
       { path: 'loc-admin', component: LocAdminComponent },
       { path: 'history', component: EmpHistoryComponent },
       { path: 'reports', component: EmpReportsComponent },
+
+      { path: 'reports/daily', component: DailyReportsComponent },
+      { path: 'reports/monthly', component: MonthlyReportsComponent },
       { path: 'profile', component: EmpProfileComponent },
       { path: 'dispatch', component: DispatchComponent },
-      {path:'userEdit', component:UserEditComponent},
-      {path:'addLocAdmin',component:AddLocAdminComponent},
-      {path:'addRefSeq',component:AddRefSeqComponent},
-      {path:'addDisUser', component:AddDisUserComponent},
-      {path:'disUserEdit',component:DisUserEditComponent}
+      { path: 'userEdit', component: UserEditComponent },
+      { path: 'addLocAdmin', component: AddLocAdminComponent },
+      { path: 'addRefSeq', component: AddRefSeqComponent },
+      { path: 'addDisUser', component: AddDisUserComponent },
+      { path: 'disUserEdit', component: DisUserEditComponent }
 
-     // { path: '', redirectTo: '/loc-admin', pathMatch: 'full' } // Default route
+      // { path: '', redirectTo: '/loc-admin', pathMatch: 'full' } // Default route
     ]
   }
 ];

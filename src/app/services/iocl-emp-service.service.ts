@@ -9,38 +9,38 @@ import { TrnParcelOut } from '../model/trnParcelOut';
   providedIn: 'root'
 })
 export class IoclEmpServiceService {
-  private baseUrl='http://localhost:8182/api/v1/employee';
-  private disUrl='http://localhost:8182/api/v1/dispatch';
-  
-  empData:any='';
-  userHistory:any='';
+  private baseUrl = 'http://localhost:8182/api/v1/employee';
+  private disUrl = 'http://localhost:8182/api/v1/dispatch';
 
-  constructor(private http:HttpClient) { }
+  empData: any = '';
+  userHistory: any = '';
 
-     // Service method for login
+  constructor(private http: HttpClient) { }
+
+  // Service method for login
   authenticateUser(id: string, password: string, captcha_value: string): Observable<any> {
-    const loginRequest = { id, password,captcha_value };
-    return this.http.post(`${this.baseUrl}/signin`, loginRequest,{withCredentials: true});
+    const loginRequest = { id, password, captcha_value };
+    return this.http.post(`${this.baseUrl}/signin`, loginRequest, { withCredentials: true });
   }
 
-   // Service method to get captcha
-   getCaptcha(): Observable<any> {
+  // Service method to get captcha
+  getCaptcha(): Observable<any> {
     return this.http.get(`${this.baseUrl}/get-captcha`);
   }
 
   checkCaptcha(captchaValue: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/check-captcha/${captchaValue}`);
   }
-  setEmpData(data:any){
-    this.empData=data;
+  setEmpData(data: any) {
+    this.empData = data;
   }
-  getEmpData(){
+  getEmpData() {
     return this.empData;
   }
   signOut(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/signout`, {withCredentials: true } ,{ responseType: 'text' });
+    return this.http.post(`${this.baseUrl}/signout`, { withCredentials: true }, { responseType: 'text' });
   }
-  
+
   getMyIncomingParcelsToday(page: number = 0, size: number = 5): Observable<Page<TrnParcelIn>> {
     // Create query parameters
     let params = new HttpParams()
@@ -98,41 +98,59 @@ export class IoclEmpServiceService {
       .set('fromDate', fromDate)
       .set('toDate', toDate)
       .set('type', type);
-    return this.http.get<any[]>(`${this.baseUrl}/history/employee`, { params,withCredentials:true});
-}
-getEmployeeCodes(): Observable<string[]> {
-  return this.http.get<string[]>(`${this.baseUrl}/empCodes`);
-}
+    return this.http.get<any[]>(`${this.baseUrl}/history/employee`, { params, withCredentials: true });
+  }
 
-getLocationNames(): Observable<string> {
-  return this.http.get<string>(`${this.disUrl}/locNames`);
-}
 
-getAllLocations(): Observable<string[]> {
-  return this.http.get<string[]>(`${this.baseUrl}/locNames`);
-}
+  getHistoryByDaily(type: string): Observable<any[]> {
+    let params = new HttpParams()
+      .set('type', type);
+    return this.http.get<any[]>(`${this.baseUrl}/employee/daily/report`, { params, withCredentials: true });
+  }
 
-getEmployeesByLoc(locCode: string): Observable<string[]> {
-  return this.http.get<string[]>(`${this.baseUrl}/names/${locCode}`);
-}
 
-getRoles(): Observable<string[]> {
-  return this.http.get<string[]>(`${this.baseUrl}/roles`,{withCredentials:true});
-}
 
-getEmpCodesByLocCode(locCode: string): Observable<string[]> {
-  const params = new HttpParams().set('locCode', locCode);
-  return this.http.get<string[]>(`${this.baseUrl}/empCodesByLocCode`, { params });
-}
+  getHistoryByMonthly(month: number, year: number, type: string): Observable<any[]> {
+    let params = new HttpParams()
+      .set('month', month)
+      .set('year', year)
+      .set('type', type);
+    return this.http.get<any[]>(`${this.baseUrl}/employee/monthly/report`, { params, withCredentials: true });
+  }
 
-getUserNameByUserId(userId: string): Observable<string> {
-  const params = new HttpParams().set('userId', userId);
-  return this.http.get<string>(`${this.baseUrl}/userNameByUserId`, { params,responseType: 'text' as 'json'},);
-}
+  getEmployeeCodes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/empCodes`);
+  }
 
-getEmpCodesBylogUserLocCode(): Observable<string[]> {
-  //const params = new HttpParams().set('locCode', locCode);
-  return this.http.get<string[]>(`${this.baseUrl}/empCodesByloguserLocCode`, {withCredentials:true });
-}
+  getLocationNames(): Observable<string> {
+    return this.http.get<string>(`${this.disUrl}/locNames`);
+  }
+
+  getAllLocations(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/locNames`);
+  }
+
+  getEmployeesByLoc(locCode: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/names/${locCode}`);
+  }
+
+  getRoles(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/roles`, { withCredentials: true });
+  }
+
+  getEmpCodesByLocCode(locCode: string): Observable<string[]> {
+    const params = new HttpParams().set('locCode', locCode);
+    return this.http.get<string[]>(`${this.baseUrl}/empCodesByLocCode`, { params });
+  }
+
+  getUserNameByUserId(userId: string): Observable<string> {
+    const params = new HttpParams().set('userId', userId);
+    return this.http.get<string>(`${this.baseUrl}/userNameByUserId`, { params, responseType: 'text' as 'json' },);
+  }
+
+  getEmpCodesBylogUserLocCode(): Observable<string[]> {
+    //const params = new HttpParams().set('locCode', locCode);
+    return this.http.get<string[]>(`${this.baseUrl}/empCodesByloguserLocCode`, { withCredentials: true });
+  }
 
 }
