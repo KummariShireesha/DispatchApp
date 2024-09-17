@@ -74,7 +74,9 @@ export class ParcelOutEditComponent {
     const formValues = this.editForm.value;
     const updatedData = {
       ...formValues,
-      createdDate: formatDate(formValues.createdDate, 'yyyy-MM-dd', 'en-US')  // Adjust format if needed
+      createdDate: formatDate(formValues.createdDate, 'yyyy-MM-dd', 'en-US'),  // Adjust format if needed
+      recipientLocCode: this.extractLocCode(formValues.recipientLocCode) // Handle undefined by providing a fallback empty string
+
     };
     const senderLocCode = this.parcelData.senderLocCode.trim();
     const outTrackingId = this.parcelData.outTrackingId; // Assuming you have a trackingId field in the parcelData
@@ -89,6 +91,12 @@ export class ParcelOutEditComponent {
     );
   }
 
+
+  extractLocCode(locCodeString: string): string {
+    const locCodeMatch = locCodeString.match(/\((\d+)\)/); // Extract digits inside parentheses
+    return locCodeMatch ? locCodeMatch[1] : locCodeString.trim(); // Return locCode or original value if no match
+  }
+  
   markAllAsTouched() {
     Object.values(this.editForm.controls).forEach(control => {
       control.markAsTouched();

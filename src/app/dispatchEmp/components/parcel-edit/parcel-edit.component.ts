@@ -102,7 +102,9 @@ export class ParcelEditComponent {
     ...formValues,
     consignmentDate: formatDate(formValues.consignmentDate, 'yyyy-MM-dd', 'en-US'),
     receivedDate: formatDate(formValues.receivedDate, 'yyyy-MM-dd', 'en-US'),
-    createdDate: formatDate(formValues.createdDate, 'yyyy-MM-dd', 'en-US')
+    createdDate: formatDate(formValues.createdDate, 'yyyy-MM-dd', 'en-US'),
+    senderLocCode: this.extractLocCode(formValues.senderLocCode) // Extract locCode from the string
+
   };
     // Assuming recipientLocCode and inTrackingId are part of the parcelData
     const recipientLocCode = this.parcelData.recipientLocCode.trim();
@@ -122,6 +124,11 @@ export class ParcelEditComponent {
     Object.values(this.editForm.controls).forEach(control => {
       control.markAsTouched();
     });
+  }
+
+  extractLocCode(locCodeString: string): string {
+    const locCodeMatch = locCodeString.match(/\((\d+)\)/); // Extract digits inside parentheses
+    return locCodeMatch ? locCodeMatch[1] : locCodeString.trim(); // Return locCode or the original value if no match
   }
   handleSuccess(response: any) {
     // Optionally show a success message

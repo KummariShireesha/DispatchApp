@@ -74,6 +74,28 @@ export class UserEditComponent {
     });
   }
 
+  // onSubmit() {
+  //   if (this.editForm.invalid) {
+  //     this.markAllAsTouched(); // Optional: Mark all fields as touched to show validation errors
+  //     return;
+  //   }
+  
+  //   const updatedData = this.editForm.value;
+  
+  //   // Assuming recipientLocCode and inTrackingId are part of the parcelData
+  //   const empLocCode = this.userData.locCode.trim();
+  //   const empUserId = this.userData.userId;
+  
+  //   this.mstUserService.updateUser(empLocCode,empUserId , updatedData).subscribe(
+  //     response => {
+  //       this.handleSuccess(response); // Handle success response
+  //     },
+  //     error => {
+  //       this.handleError(error); // Handle error response
+  //     }
+  //   );
+  // }
+
   onSubmit() {
     if (this.editForm.invalid) {
       this.markAllAsTouched(); // Optional: Mark all fields as touched to show validation errors
@@ -82,11 +104,17 @@ export class UserEditComponent {
   
     const updatedData = this.editForm.value;
   
-    // Assuming recipientLocCode and inTrackingId are part of the parcelData
-    const empLocCode = this.userData.locCode.trim();
+    // Extract the locCode inside the brackets if locCode includes a formatted name
+    let empLocCode = this.userData.locCode.trim();
+    const locCodeMatch = empLocCode.match(/\(([^)]+)\)/); // Regex to extract the code inside parentheses
+    if (locCodeMatch) {
+      empLocCode = locCodeMatch[1]; // Get the value inside the parentheses
+    }
+  
+    empLocCode = empLocCode.trim(); // Ensure no extra spaces in locCode
     const empUserId = this.userData.userId;
   
-    this.mstUserService.updateUser(empLocCode,empUserId , updatedData).subscribe(
+    this.mstUserService.updateUser(empLocCode, empUserId, updatedData).subscribe(
       response => {
         this.handleSuccess(response); // Handle success response
       },
@@ -95,6 +123,8 @@ export class UserEditComponent {
       }
     );
   }
+  
+  
   
   markAllAsTouched() {
     Object.values(this.editForm.controls).forEach(control => {

@@ -165,27 +165,56 @@ onChangeStatus(user: any) {
   }
 }
 
+// deleteUser(locCode: string, userId: string) {
+  
+//   this.dialogRef.close();
+
+//   this.mstUserService.deleteUser(locCode, userId).subscribe({
+//       next: () => {
+//           this.fetchAllUsers();
+//           this.snackBar.open('User deleted successfully!', 'Close', {
+//               duration: 3000,
+//           });
+//           this.dialog.closeAll(); 
+//           this.router.navigate(['/ioclEmployee/loc-admin']);
+//       },
+//       error: (err) => {
+//           console.error('Error deleting user:', err);
+//           this.snackBar.open('Failed to delete user!', 'Close', {
+//               duration: 3000,
+//           });
+//       }
+//   });
+// }
+
+
 deleteUser(locCode: string, userId: string) {
+  // Extract the locCode inside the brackets if locCode includes a formatted name
+  const locCodeMatch = locCode.match(/\(([^)]+)\)/); // Regex to extract the code inside parentheses
+  if (locCodeMatch) {
+    locCode = locCodeMatch[1]; // Get the value inside the parentheses
+  }
+
   // Close the confirmation dialog
   this.dialogRef.close();
 
   // Call the service to delete the user based on locCode and empCode
-  this.mstUserService.deleteUser(locCode, userId).subscribe({
-      next: () => {
-          // Refresh the user data (you might want to implement a method to reload the user list)
-          this.fetchAllUsers();
-          this.snackBar.open('User deleted successfully!', 'Close', {
-              duration: 3000,
-          });
-          this.dialog.closeAll(); 
-          this.router.navigate(['/ioclEmployee/loc-admin']);
-      },
-      error: (err) => {
-          console.error('Error deleting user:', err);
-          this.snackBar.open('Failed to delete user!', 'Close', {
-              duration: 3000,
-          });
-      }
+  this.mstUserService.deleteUser(locCode.trim(), userId).subscribe({
+    next: () => {
+      // Refresh the user data
+      this.fetchAllUsers();
+      this.snackBar.open('User deleted successfully!', 'Close', {
+        duration: 3000,
+      });
+      this.dialog.closeAll();
+      this.router.navigate(['/ioclEmployee/loc-admin']);
+    },
+    error: (err) => {
+      console.error('Error deleting user:', err);
+      this.snackBar.open('Failed to delete user!', 'Close', {
+        duration: 3000,
+      });
+    }
   });
 }
 
